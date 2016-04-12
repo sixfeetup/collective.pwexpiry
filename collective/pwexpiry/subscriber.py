@@ -3,6 +3,9 @@ from AccessControl import Unauthorized
 from plone import api
 from plone.registry.interfaces import IRegistry
 from zope.component import queryUtility
+from zope.event import notify
+
+from collective.pwexpiry.events import UserLocked
 
 
 def ValidPasswordEntered(user, event):
@@ -63,3 +66,4 @@ def InvalidPasswordEntered(user, event):
         current_time = portal.ZopeTime()
         user.setMemberProperties({'account_locked_date': current_time,
                                   'account_locked': True})
+        notify(UserLocked(user))

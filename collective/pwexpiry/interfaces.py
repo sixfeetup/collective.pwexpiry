@@ -58,6 +58,13 @@ class IInvalidPasswordEntered(IObjectEvent):
     """
 
 
+class IUserLocked(Interface):
+    """
+    """
+
+    user = Attribute("The user that was locked")
+
+
 class IUserUnlocked(Interface):
     """
     """
