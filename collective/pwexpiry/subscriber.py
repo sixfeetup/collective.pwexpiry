@@ -60,6 +60,9 @@ def InvalidPasswordEntered(user, event):
     # limit allowed
     current_tries += 1
     user.setMemberProperties({'password_tries': current_tries})
+    if user.getProperty('account_locked'):
+        # already locked - skip the rest
+        return
 
     if current_tries >= allowed_tries:
         portal = api.portal.get()
